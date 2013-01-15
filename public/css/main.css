@@ -1,0 +1,39 @@
+
+body, html {
+	padding:0;
+	margin:0;
+	background: #090909;
+}
+
+body {
+	overflow: hidden;
+}
+
+body,
+canvas {
+	width: 100%;
+	height: 100%;
+}
+
+.controls {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	box-shadow: 0 0 3px #121212;
+	border-radius: 4px;
+}
+
+#system-card {
+	position:absolute;
+
+	border-left: 4px solid red;
+	padding: 10px 12px;
+	background: rgba(16, 16, 16, 0.95);
+	box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.95);
+}
+	#system-card h4 {
+		color: #189fcc;
+		margin: 0;
+		padding: 0;
+	}
+

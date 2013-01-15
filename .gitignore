@@ -1,0 +1,19 @@
+# Slim
+/var/*
+!/var/README.md
+.DS_STORE
+
+# Composer
+composer.lock
+/vendor
+
+# Project
+*.gz
+.idea
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Netbeans
+nbproject

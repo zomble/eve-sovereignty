@@ -1,0 +1,33 @@
+web1:
+  # Apache settings
+  document_root: public
+  apache_log_level: warn
+  # PHP settings
+  php_version: 5.3.10
+  php_extensions:
+    - apc
+    - curl
+    - fileinfo
+    - hash
+    - json
+    - mbstring
+    - mcrypt
+    - simplexml
+    - yaml
+    - zip
+  php_error_reporting: 30719 # Same as E_ALL
+  php_display_errors: "1"
+  php_short_open_tag: "0"
+  php_default_mimetype: "text/html"
+  php_date_timezone: "US/Eastern"
+  php_default_locale: "en_US"
+  php_max_execution_time: 30
+  php_max_input_time: 60
+  php_post_max_size: "8M"
+  php_file_uploads: "1"
+  php_upload_max_filesize: "2M"
+  php_max_file_uploads: 20
+  # Hooks
+  after_build:
+    - "php parse-tsv.php"
+    - "php parse-xml.php"

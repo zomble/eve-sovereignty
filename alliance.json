@@ -1,0 +1,21 @@
+// Alliance
+{
+	id: 498125261,
+	name: 'Test Alliance Please Ignore',
+	shortName: 'TEST',
+	startDate: '2010-06-01 05:36:00',
+	colors: [
+		20130101: ec00ff,
+		20130114: ff0001
+	],
+	logo: {
+		graphicID: 0,
+		shape1: 419,
+		shape2: 0,
+		shape3: 0,
+		color1: 0,
+		color2: 0,
+		color3: 0,
+	}
+	cachedUntil: '2013-01-14 13:06:46'
+}
