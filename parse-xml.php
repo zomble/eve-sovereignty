@@ -62,8 +62,8 @@ foreach($xml->result->rowset->row as $row) {
 	}
 
 	$data[$alliance] = (object) array(
-		'name' => $row['name'],
-		'shortName' => $row['shortName'],
+		'name' => (string) $row['name'],
+		'shortName' => (string) $row['shortName'],
 	);
 }
 

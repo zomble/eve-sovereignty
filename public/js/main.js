@@ -1,6 +1,7 @@
 define(
 	['jquery', 'threejs', 'threejs-detector', 'threejs-stats', 'threejs-trackball'],
 	function($, THREE, Dectector, Stats) {
+		'use strict';
 
 		// Check for webgl support.
 		if (!Detector.webgl) {
@@ -64,13 +65,18 @@ define(
 						return;
 					}
 
-					var system = eve.data.systems[systemID];console.log(system);
+					var system = eve.data.systems[systemID];
+
+					var alliance = getSystemAlliance(systemID);
 
 					var $ele = $('#system-card');
 					$ele.html('')
 
 					var html = [];
 					html.push('<h4>'+system.name+'</h4>');
+					if (alliance !== null) {
+						html.push('<strong>'+alliance.name+'</strong><br/>');
+					}
 					html.push('<strong>Region:</strong> ???<br/>');
 					if (eve.data.kills[systemID] != null) {
 						html.push('<strong>Kills:</strong> '+eve.data.kills[systemID]+'<br/>');
@@ -109,12 +115,16 @@ define(
 		};
 
 		var getSystemAlliance = function (systemID) {
-			
+			if (systemID == null || eve.data.sovereignty[systemID] == null) {
+				return null;
+			}
+			// Should check it.
+			return eve.data.alliances[eve.data.sovereignty[systemID]] || null;
 		}
 
 		var setup = function () {
 
-           	    	// CAMERA @fix
+			// CAMERA @fix
             var SCREEN_WIDTH = $(window).width(), SCREEN_HEIGHT = $(window).height();
             var ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT;
 
@@ -132,16 +142,14 @@ define(
             renderer = new THREE.WebGLRenderer( {antialias:true, clearColor: 0x000000, clearAlpha: 1 } );
             renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
             renderer.sortObjects = false;
-            container = document.createElement( 'div' );
-            document.body.appendChild( container );
-            container.appendChild(renderer.domElement);
+            $('<div></div>').appendTo('body').append(renderer.domElement);
 
             // STATS
             stats = new Stats();
             stats.domElement.style.position = 'absolute';
             stats.domElement.style.bottom = '0px';
             stats.domElement.style.zIndex = 100;
-            container.appendChild( stats.domElement );
+    //        container.appendChild( stats.domElement );
 
             // Create controls.
             controls = new THREE.TrackballControls( camera );
@@ -259,7 +267,7 @@ define(
 			geometry = new THREE.Geometry();
             //create one shared material
             var sprite = THREE.ImageUtils.loadTexture("system.png");
-            material = new THREE.ParticleBasicMaterial({
+            var material = new THREE.ParticleBasicMaterial({
                     size: 20,
                     map: sprite,
                     blending: THREE.AdditiveBlending,
@@ -325,9 +333,6 @@ define(
 					j++;
 				}
 			}
-
-			// initialize object to perform world/screen calculations
-			projector = new THREE.Projector();
 
         renderScene();
 	};
